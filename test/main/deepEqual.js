@@ -82,25 +82,32 @@ QUnit.test( "Primitive types and constants", function( assert ) {
 
 	assert.equal( QUnit.equiv( 0, new SafeNumber() ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( new SafeNumber(), 0 ), true, "primitives vs. objects" );
+	assert.equal( QUnit.equiv( new SafeNumber(), new SafeNumber() ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( 1, new SafeNumber( 1 ) ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( new SafeNumber( 1 ), 1 ), true, "primitives vs. objects" );
+	assert.equal( QUnit.equiv( new SafeNumber( 1 ), new SafeNumber( 1 ) ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( new SafeNumber( 0 ), 1 ), false, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( 0, new SafeNumber( 1 ) ), false, "primitives vs. objects" );
 
 	assert.equal( QUnit.equiv( new SafeString(), "" ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( "", new SafeString() ), true, "primitives vs. objects" );
+	assert.equal( QUnit.equiv( new SafeString(), new SafeString() ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( new SafeString( "My String" ), "My String" ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( "My String", new SafeString( "My String" ) ), true, "primitives vs. objects" );
+	assert.equal( QUnit.equiv( new SafeString( "My String" ), new SafeString( "My String" ) ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( "Bad String", new SafeString( "My String" ) ), false, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( new SafeString( "Bad String" ), "My String" ), false, "primitives vs. objects" );
 
 	assert.equal( QUnit.equiv( false, new SafeBoolean() ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( new SafeBoolean(), false ), true, "primitives vs. objects" );
+	assert.equal( QUnit.equiv( new SafeBoolean(), new SafeBoolean() ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( true, new SafeBoolean( true ) ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( new SafeBoolean( true ), true ), true, "primitives vs. objects" );
+	assert.equal( QUnit.equiv( new SafeBoolean( true ), new SafeBoolean( true ) ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( true, new SafeBoolean( 1 ) ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( false, new SafeBoolean( false ) ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( new SafeBoolean( false ), false ), true, "primitives vs. objects" );
+	assert.equal( QUnit.equiv( new SafeBoolean( false ), new SafeBoolean( false ) ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( false, new SafeBoolean( 0 ) ), true, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( true, new SafeBoolean( false ) ), false, "primitives vs. objects" );
 	assert.equal( QUnit.equiv( new SafeBoolean( false ), true ), false, "primitives vs. objects" );
