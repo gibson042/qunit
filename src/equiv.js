@@ -9,18 +9,21 @@ QUnit.equiv = (function() {
 	var parents = [];
 	var parentsB = [];
 
+	function guaranteed() { return true; }
+
 	function useStrictEquality( b, a ) {
 
-		/*jshint eqeqeq:false */
-		if ( b instanceof a.constructor || a instanceof b.constructor ) {
-
-			// To catch short annotation VS 'new' annotation of a declaration. e.g.:
-			// `var i = 1;`
-			// `var j = new Number(1);`
-			return a == b;
-		} else {
-			return a === b;
+		// To catch short annotation VS 'new' annotation of a declaration. e.g.:
+		// `var i = 1;`
+		// `var j = new Number(1);`
+		if ( typeof b === "object" ) {
+			b = b.valueOf();
 		}
+		if ( typeof a === "object" ) {
+			a = a.valueOf();
+		}
+
+		return a === b;
 	}
 
 	function compareConstructors( a, b ) {
@@ -58,16 +61,14 @@ QUnit.equiv = (function() {
 	}
 
 	var callbacks = {
+		"null": guaranteed,
+		"undefined": guaranteed,
+		"nan": guaranteed,
+
 		"string": useStrictEquality,
 		"boolean": useStrictEquality,
 		"number": useStrictEquality,
-		"null": useStrictEquality,
-		"undefined": useStrictEquality,
 		"symbol": useStrictEquality,
-
-		"nan": function( b ) {
-			return isNaN( b );
-		},
 
 		"date": function( b, a ) {
 			return QUnit.objectType( b ) === "date" && a.valueOf() === b.valueOf();
